@@ -1,0 +1,17 @@
+{
+  "name": "travis-matrix-badges",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.11.2",
+    "request": "^2.53.0",
+    "temp": "^0.8.1",
+    "webshot": "^0.15.3"
+  }
+}
