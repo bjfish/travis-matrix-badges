@@ -29,6 +29,7 @@ https://travis-matrix-badges.herokuapp.com/repos/${repo_owner}/${repo_name}/bran
 ```
 
 Live example:
+
 | Build1            | Build2            | Build3            | Build4            |
 |-------------------|-------------------|-------------------|-------------------|
 | [![Build1][1]][5] | [![Build2][2]][5] | [![Build3][3]][5] | [![Build4][4]][5] |
