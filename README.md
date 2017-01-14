@@ -21,5 +21,21 @@ https://travis-matrix-badges.herokuapp.com/repos/${repo_owner}/${repo_name}/bran
 
 [![Build Status](https://travis-matrix-badges.herokuapp.com/repos/bjfish/grails-ci-build-matrix-example/branches/master)](https://travis-ci.org/bjfish/grails-ci-build-matrix-example)
 
+### Badge-Per-Job
 
+Another option would be to specify a badge per job:
+```
+https://travis-matrix-badges.herokuapp.com/repos/${repo_owner}/${repo_name}/branches/${branch}/${job_number}
+```
 
+Live example:
+
+| Build1            | Build2            | Build3            | Build4            |
+|-------------------|-------------------|-------------------|-------------------|
+| [![Build1][1]][5] | [![Build2][2]][5] | [![Build3][3]][5] | [![Build4][4]][5] |
+
+[1]: https://travis-matrix-badges.herokuapp.com/repos/bjfish/grails-ci-build-matrix-example/branches/master/1
+[2]: https://travis-matrix-badges.herokuapp.com/repos/bjfish/grails-ci-build-matrix-example/branches/master/2
+[3]: https://travis-matrix-badges.herokuapp.com/repos/bjfish/grails-ci-build-matrix-example/branches/master/3
+[4]: https://travis-matrix-badges.herokuapp.com/repos/bjfish/grails-ci-build-matrix-example/branches/master/4
+[5]: https://travis-ci.org/bjfish/grails-ci-build-matrix-example
