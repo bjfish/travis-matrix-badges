@@ -68,8 +68,8 @@ request(options, function (error, response, body) {
            if (requestedJobNumber != ""){
              foundRequestedJobNumber = true;
              res.redirect(state == "passed" ? 
-                "https://img.shields.io/wercker/ci/wercker/docs.svg" :
-                "https://img.shields.io/teamcity/http/teamcity.jetbrains.com/s/bt345.svg")
+                "https://img.shields.io/badge/build-passing-brightgreen.svg" :
+                "https://img.shields.io/badge/build-failure-red.svg")
            }
            html += "<td>" + number + " "
            if(state == "passed"){
