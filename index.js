@@ -67,9 +67,7 @@ request(options, function (error, response, body) {
            if (requestedJobNumber != "" && requestedJobNumber != shortNumber) return;
            if (requestedJobNumber != ""){
              foundRequestedJobNumber = true;
-             res.redirect(state == "passed" ? 
-                "https://img.shields.io/badge/build-passing-brightgreen.svg" :
-                "https://img.shields.io/badge/build-failure-red.svg")
+             redirectToShieldsIo(state, res);
            }
            html += "<td>" + number + " "
            if(state == "passed"){
@@ -151,6 +149,34 @@ function screenShot(html, callback){
     callback(original, function(){
       cleanupTempFile(original);
     });
+  });
+}
+
+function redirectToShieldsIo(state, res) {
+  if (state == "passed") {
+    redirect("https://img.shields.io/badge/build-passing-brightgreen.svg", state, res)
+  }
+  else if (state == "failed") {
+    redirect("https://img.shields.io/badge/build-failure-red.svg", state, res);
+  }
+  else {
+    var url = "https://img.shields.io/badge/build-" + state + "-yellow.svg";
+    redirect(url, state, res);
+  }
+}
+
+function redirect(url, state, res) {
+  request.get(url, function(err, response, body) {
+    if (err) {
+      res.status(500).send(err);
+      return;
+    }
+    res.header("Cache-Control", "no-cache, must-revalidate");
+    res.header("Pragma", "no-cache");
+    res.header("Expires", "Thu, 01 Jan 1970 00:00:00 GMT");
+    res.header("ETag", state);
+    res.header("content-type", "image/svg+xml;charset=utf-8");
+    res.status(response.statusCode).send(body);
   });
 }
 
