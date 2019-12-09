@@ -17,6 +17,7 @@ app.get("/repos/(*)", function(req, res) {
   var repo = req.params[0];
   var branchesIndex = repo.indexOf("branches/");
   var requestedJobNumber = "";
+  var baseUrl = req.query.use_travis_com ? "https://api.travis-ci.com" : "https://api.travis-ci.org";
   if (branchesIndex >= 0) {
     var branches =  repo.slice(branchesIndex);
     var tokens = branches.split("/");
@@ -28,14 +29,14 @@ app.get("/repos/(*)", function(req, res) {
   //console.log(repo);
   var html = "<br/><table><tr><th>Builds</th></tr>";
    var options = {
-    url: "https://api.travis-ci.org/repos/" + repo,
+    url: baseUrl + "/repos/" + repo,
     headers: {
-         'Accept': 'application/vnd.travis-ci.2+json'
+         'Accept': 'application/vnd.travis-ci.2.1+json'
        }
    };
 request(options, function (error, response, body) {
   if (!error && response.statusCode == 200) {
-    //console.log(body); 
+    //console.log(body);
     var buildId = JSON.parse(body).branch.id;
     if(!buildId){
       res.status(400);
@@ -43,9 +44,9 @@ request(options, function (error, response, body) {
       res.send('Branch build id not found');
     }
     var options2 = {
-       url: "https://api.travis-ci.org/builds/" + buildId,
+       url: baseUrl + "/builds/" + buildId,
        headers: {
-         'Accept': 'application/vnd.travis-ci.2+json'
+         'Accept': 'application/vnd.travis-ci.2.1+json'
        }
      };
      //console.log(options2.url);
@@ -100,7 +101,7 @@ request(options, function (error, response, body) {
           url = req.url;
           res.send('Error retrieving build');
        }
-       
+
     });
 
   } else {
@@ -108,12 +109,12 @@ request(options, function (error, response, body) {
     url = req.url;
     res.send('Branch build id not found');
     }
-}) 
-   
-  
+})
+
+
 
 });
-  
+
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
 });
@@ -133,7 +134,7 @@ function writeFileToResponse(file, resp, callback){
 function cleanupTempFile(file){
   fs.unlink(file, function(err){
     if(err) console.error(err);
-  });  
+  });
 }
 
 function screenShot(html, callback){
@@ -141,7 +142,7 @@ function screenShot(html, callback){
   var options = {
     shotSize: {
       width: 320
-    , height: 'all' 
+    , height: 'all'
     }
     , siteType:'html'
   }
