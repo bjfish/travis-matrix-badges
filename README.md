@@ -39,3 +39,13 @@ Live example:
 [3]: https://travis-matrix-badges.herokuapp.com/repos/bjfish/grails-ci-build-matrix-example/branches/master/3
 [4]: https://travis-matrix-badges.herokuapp.com/repos/bjfish/grails-ci-build-matrix-example/branches/master/4
 [5]: https://travis-ci.org/bjfish/grails-ci-build-matrix-example
+
+### Using with travis-ci.com
+
+If you're using travis-ci.com for Open Source project, you can set the query
+parameter `use_travis_com` to `true` to fetch the status from travis-ci.com
+instead of travis-ci.org.
+
+```
+https://travis-matrix-badges.herokuapp.com/repos/${repo_owner}/${repo_name}/branches/${branch}?use_travis_com=true
+```
